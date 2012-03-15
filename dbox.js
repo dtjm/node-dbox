@@ -17,7 +17,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/oauth/request_token",
         "body": qs.stringify(signature)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         var obj = {}
         b.split("&").forEach(function(kv){
           var kv = kv.split("=")
@@ -41,7 +41,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/oauth/access_token",
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         var obj = {}
         b.split("&").forEach(function(kv){
           var kv = kv.split("=")
@@ -59,7 +59,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/account/info",
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -72,7 +72,7 @@ exports.createClient = function(config){
         "url": "https://api-content.dropbox.com/1/files/" + (params.root || root) + "/" + qs.escape(path) + "?" + qs.stringify(params),
         "encoding": null
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -85,7 +85,7 @@ exports.createClient = function(config){
         "url": "https://api-content.dropbox.com/1/files_put/" + (params.root || root) + "/" + qs.escape(path) + "?" + qs.stringify(params),
         "body": body 
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -96,7 +96,7 @@ exports.createClient = function(config){
         "method": "GET",
         "url": "https://api.dropbox.com/1/metadata/" + (params.root || root) + "/" + qs.escape(path) + "?" + qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -107,7 +107,7 @@ exports.createClient = function(config){
         "method": "GET",
         "url": "https://api.dropbox.com/1/revisions/" + (params.root || root) + "/" + qs.escape(path) + "?" + qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -126,7 +126,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/restore/" + (params.root || root) + "/" + qs.escape(path), // + "?" + qs.stringify(params)
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -145,7 +145,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/search/" + (params.root || root) + "/" + qs.escape(path),
         "body": body
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -162,7 +162,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/shares/" + (params.root || root) + "/" + qs.escape(path), 
         "body": body
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -179,7 +179,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/media/" + (params.root || root) + "/" + qs.escape(path), 
         "body": body
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -191,7 +191,7 @@ exports.createClient = function(config){
         "url": "https://api-content.dropbox.com/1/thumbnails/" + (params.root || root) + "/" + qs.escape(path) + "?" + qs.stringify(params),
         "encoding": null
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, b)
       })
     },
@@ -207,7 +207,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/fileops/copy",
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -225,7 +225,7 @@ exports.createClient = function(config){
         "body": qs.stringify(params)
       }
 
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -240,7 +240,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/fileops/delete",
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     },
@@ -255,7 +255,7 @@ exports.createClient = function(config){
         "url": "https://api.dropbox.com/1/fileops/create_folder",
         "body": qs.stringify(params)
       }
-      request(args, function(e, r, b){
+      return request(args, function(e, r, b){
         cb(r.statusCode, JSON.parse(b))
       })
     }
